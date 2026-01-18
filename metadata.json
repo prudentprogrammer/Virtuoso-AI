@@ -1,0 +1,8 @@
+{
+  "name": "Virtuoso AI",
+  "description": "An AI-powered music practice coach that compares your performance with a teacher's reference clip to provide targeted feedback.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
