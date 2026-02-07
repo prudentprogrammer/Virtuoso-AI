@@ -5,7 +5,15 @@ import { fileToBase64, getMimeType } from "./utils";
 
 // Initialize Gemini Client
 // API_KEY is expected to be available in the environment variables
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = process.env.API_KEY;
+console.log('API Key present:', !!apiKey);
+console.log('API Key prefix:', apiKey?.substring(0, 10));
+
+if (!apiKey) {
+  console.error('GEMINI_API_KEY is not set in environment variables');
+}
+
+const ai = new GoogleGenAI({ apiKey: apiKey || '' });
 
 export const analyzePerformance = async (request: AnalysisRequest): Promise<AnalysisResult> => {
   try {
@@ -90,8 +98,10 @@ export const analyzePerformance = async (request: AnalysisRequest): Promise<Anal
       timestamp: Date.now()
     };
 
-  } catch (error) {
+  } catch (error: any) {
     console.error("Gemini Analysis Error:", error);
+    console.error("Error message:", error?.message);
+    console.error("Error response:", error?.response);
     throw error;
   }
 };

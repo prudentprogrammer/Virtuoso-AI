@@ -1,5 +1,5 @@
 // Using the Pro model for complex multimodal analysis (video/audio comparison)
-export const GEMINI_MODEL = 'gemini-3-pro-preview';
+export const GEMINI_MODEL = 'gemini-2.0-flash';
 
 export const MAX_FILE_SIZE_MB = 50; // Soft limit to prevent browser crash on base64 conversion
 
