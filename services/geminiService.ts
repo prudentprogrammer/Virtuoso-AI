@@ -40,36 +40,38 @@ export const analyzePerformance = async (request: AnalysisRequest): Promise<Anal
 
     const promptText = `
       Act as a world-class music virtuoso and teacher (like a combination of the best conservatory professors).
-      
+
       I am providing two inputs:
       1. THE TEACHER (Reference Performance).
       2. THE STUDENT (Practice Performance).
-      
+
       Lesson Context: "${request.context}"
-      
+
       Your task is to analyze the Student's performance against the Teacher's reference.
       Compare them based on:
       1. Rhythm & Timing (Is the student rushing or dragging? Are the rhythmic subdivisions accurate?)
       2. Pitch & Intonation (If applicable, is the student in tune?)
       3. Phrasing & Dynamics (Is the student matching the emotional contour and volume changes?)
       4. Technique (If video is provided, observe posture, hand shape, bow speed, stick control, etc.)
-      
+
+      IMPORTANT: For each observation, include the specific timestamp (MM:SS format) where the issue or strength occurs in the student's performance. Reference both the teacher's timing and student's timing when comparing.
+
       Output Format:
       Please provide the response in valid Markdown.
       Use the following structure:
-      
+
       ## 🎵 Executive Summary
       (A 2-sentence overview of how close the student is)
-      
+
       ## ✅ Strengths
-      (What did the student do well compared to the teacher?)
-      
+      (What did the student do well? Include timestamps, e.g., "At 0:15, excellent vibrato...")
+
       ## ⚠️ Areas for Correction
-      (Specific moments or techniques that deviated from the reference)
-      
+      (Specific moments that need work. Format each item with timestamp: "[MM:SS] Issue description")
+
       ## 🎓 Coach's Action Plan
-      (3 distinct, actionable exercises or mental cues to fix the issues)
-      
+      (3 exercises. Reference specific timestamps to practice, e.g., "Focus on the passage at 0:30-0:45")
+
       Tone: Encouraging but very precise and demanding of high quality.
     `;
 
