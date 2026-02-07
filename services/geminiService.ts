@@ -70,7 +70,22 @@ export const analyzePerformance = async (request: AnalysisRequest): Promise<Anal
       (Specific moments that need work. Format each item with timestamp: "[MM:SS] Issue description")
 
       ## 🎓 Coach's Action Plan
-      (3 exercises. Reference specific timestamps to practice, e.g., "Focus on the passage at 0:30-0:45")
+      (3 quick tips or mental cues to keep in mind during practice)
+
+      ## 🏋️ Practice Drills
+      Generate 3-5 specific, actionable practice exercises. For each drill include:
+      - **Drill Name**: A short memorable name
+      - **Target**: What specific issue this addresses (reference timestamp)
+      - **Instructions**: Step-by-step how to do the exercise
+      - **Repetitions**: How many times or how long to practice
+      - **Success Criteria**: How to know when it's mastered
+
+      Example format:
+      ### Drill 1: Slow Motion Passage
+      - **Target**: Rushing at [0:12-0:18]
+      - **Instructions**: Play the passage at 50% tempo with a metronome. Focus on landing each note exactly on the beat.
+      - **Repetitions**: 10x perfectly before increasing tempo by 5 BPM
+      - **Success Criteria**: Can play 5x in a row at full tempo without rushing
 
       Tone: Encouraging but very precise and demanding of high quality.
     `;

@@ -1,11 +1,28 @@
 import React from 'react';
 import { AnalysisResult } from '../types';
-import { CheckCircle2, AlertTriangle, GraduationCap, Music } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, GraduationCap, Music, Dumbbell } from 'lucide-react';
 
 interface AnalysisViewProps {
   result: AnalysisResult | null;
   isLoading: boolean;
 }
+
+// Parse basic markdown formatting (bold, italic) into JSX
+const formatMarkdown = (text: string): React.ReactNode => {
+  // Split by **bold** and *italic* patterns
+  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
+
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      // Bold text
+      return <strong key={i} className="font-semibold text-white">{part.slice(2, -2)}</strong>;
+    } else if (part.startsWith('*') && part.endsWith('*')) {
+      // Italic text
+      return <em key={i}>{part.slice(1, -1)}</em>;
+    }
+    return part;
+  });
+};
 
 const AnalysisView: React.FC<AnalysisViewProps> = ({ result, isLoading }) => {
   if (isLoading) {
@@ -61,6 +78,9 @@ const AnalysisView: React.FC<AnalysisViewProps> = ({ result, isLoading }) => {
           } else if (title.includes("Action Plan")) {
             icon = <GraduationCap className="w-5 h-5 text-primary" />;
             titleColor = "text-primary";
+          } else if (title.includes("Practice Drills") || title.includes("Drill")) {
+            icon = <Dumbbell className="w-5 h-5 text-cyan-400" />;
+            titleColor = "text-cyan-400";
           }
 
           return (
@@ -69,10 +89,10 @@ const AnalysisView: React.FC<AnalysisViewProps> = ({ result, isLoading }) => {
                 {icon}
                 {title.replace(/[*_~]/g, '')}
               </h3>
-              <div className="text-zinc-300 leading-relaxed whitespace-pre-wrap font-light text-base">
+              <div className="text-zinc-300 leading-relaxed font-light text-base">
                 {content.split('\n').map((line, lineIdx) => (
                   <p key={lineIdx} className="mb-2 last:mb-0">
-                    {line.replace(/^-\s/, '• ')}
+                    {formatMarkdown(line.replace(/^-\s/, '• '))}
                   </p>
                 ))}
               </div>
